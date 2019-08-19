@@ -21,8 +21,8 @@ import types "github.com/garavan/types-go"
 ```go
 type User struct {
 	Name        string   `json:"name"`
-	Dob         Date     `json:"dob"`
-	DeletedDate NullDate `json:"deleted_date"`
+	Dob         types.Date     `json:"dob"`
+	DeletedDate types.NullDate `json:"deleted_date"`
 }
 ```
 
@@ -31,8 +31,8 @@ type User struct {
 dobTime, _ := time.Parse("2006-01-02", "1990-06-03")
 eko := User{
 	Name:        "Eko Syamsudin",
-	Dob:         Date{Time: dobTime},
-	DeletedDate: NullDate{Time: time.Now(), Valid: true},
+	Dob:         types.Date{Time: dobTime},
+	DeletedDate: types.NullDate{Time: time.Now(), Valid: true},
 }
 
 bytes, _ := json.Marshal(&eko)
@@ -46,8 +46,8 @@ if deleted date is null
 dobTime, _ := time.Parse("2006-01-02", "1990-06-03")
 eko := User{
 	Name:        "Eko Syamsudin",
-	Dob:         Date{Time: dobTime},
-	DeletedDate: NullDate{},
+	Dob:         types.Date{Time: dobTime},
+	DeletedDate: types.NullDate{},
 }
 
 bytes, _ := json.Marshal(&eko)
