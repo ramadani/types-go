@@ -16,7 +16,7 @@ func (d *NullDate) String() string {
 }
 
 // Value null date driver value
-func (d *NullDate) Value() (driver.Value, error) {
+func (d NullDate) Value() (driver.Value, error) {
 	if !d.Valid {
 		return nil, nil
 	}
@@ -40,7 +40,7 @@ func (d *NullDate) Scan(value interface{}) error {
 }
 
 // MarshalJSON null date type
-func (d *NullDate) MarshalJSON() ([]byte, error) {
+func (d NullDate) MarshalJSON() ([]byte, error) {
 	date := "null"
 	if d.Valid {
 		date = d.String()

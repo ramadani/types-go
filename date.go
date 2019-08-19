@@ -25,7 +25,7 @@ func (d *Date) String() string {
 }
 
 // Value date driver value
-func (d *Date) Value() (driver.Value, error) {
+func (d Date) Value() (driver.Value, error) {
 	return d.String(), nil
 }
 
@@ -42,7 +42,7 @@ func (d *Date) Scan(value interface{}) error {
 }
 
 // MarshalJSON date type
-func (d *Date) MarshalJSON() ([]byte, error) {
+func (d Date) MarshalJSON() ([]byte, error) {
 	res := fmt.Sprintf("\"%s\"", d.String())
 	return []byte(res), nil
 }
