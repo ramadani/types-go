@@ -64,6 +64,50 @@ err := json.Unmarshal([]byte("{\"name\":\"Ramadani\",\"dob\":\"1992-07-25\"}"), 
 // dani.DeletedDate is equal NullDate{}
 ```
 
+### Gender
+
+```go
+type User struct {
+	Name   string `json:"name"`
+	Gender types.Gender `json:"gender"`
+}
+```
+
+```go
+eko := User{
+	Name:   "Eko Syamsudin",
+	Gender: types.Male,
+}
+
+bytes, _ := json.Marshal(&eko)
+log.Println(string(bytes))
+
+// json:
+// {"name":"Eko Syamsudin","gender":"M"}
+```
+
+### Null Gender
+
+```go
+type User struct {
+	Name   string `json:"name"`
+	Gender types.NullGender `json:"gender"`
+}
+```
+
+```go
+eko := User{
+	Name:   "Eko Syamsudin",
+	Gender: types.NullGender{},
+}
+
+bytes, _ := json.Marshal(&eko)
+log.Println(string(bytes))
+
+// json:
+// {"name":"Eko Syamsudin","gender":"null"}
+```
+
 ## Tests
 
 ```bash
