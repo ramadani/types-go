@@ -121,6 +121,10 @@ func TestNullDateScanner(t *testing.T) {
 		t.Errorf("error on date valuer: %v", err)
 	}
 
+	if !date.Valid {
+		t.Errorf("date valid should be true")
+	}
+
 	got := date.Time.Format("2006-01-02")
 	want := "2019-08-17"
 	if got != want {
