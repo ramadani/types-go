@@ -92,6 +92,7 @@ func (d *NullDate) Scan(value interface{}) error {
 	}
 
 	d.Time = t
+	d.Valid = true
 	return nil
 }
 
