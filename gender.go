@@ -110,7 +110,7 @@ func (e *NullGender) Scan(value interface{}) error {
 }
 
 // MarshalJSON marshalling null gender
-func (e *NullGender) MarshalJSON() ([]byte, error) {
+func (e NullGender) MarshalJSON() ([]byte, error) {
 	var res string
 	if !e.Valid || e.Gender == Unknown {
 		res = fmt.Sprintf("\"%s\"", "null")
