@@ -39,17 +39,18 @@ func (e Gender) String() string {
 
 // Value gender valuer
 func (e Gender) Value() (driver.Value, error) {
-	return e.String(), nil
+	return []byte(e.String()), nil
 }
 
 // Scan gender scanner
-func (e *Gender) Scan(value interface{}) error {
-	b, ok := value.([]byte)
-	if !ok {
-		return fmt.Errorf("expected []byte, got %T", value)
+func (e *Gender) Scan(src interface{}) error {
+	switch src.(type) {
+	case string:
+		e.parseFrom(src.(string))
+	case []byte:
+		e.parseFrom(string(src.([]byte)))
 	}
 
-	e.parseFrom(string(b))
 	return nil
 }
 

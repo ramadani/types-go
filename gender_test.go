@@ -12,7 +12,7 @@ func TestGenderValuer(t *testing.T) {
 		t.Errorf("error on gender valuer: %v", err)
 	}
 
-	got := val.(string)
+	got := string(val.([]byte))
 	want := "M"
 
 	if got != want {
@@ -88,8 +88,12 @@ func TestNullGenderValuer(t *testing.T) {
 		t.Errorf("error on null gender valuer: %v", err)
 	}
 
-	got := val.(string)
+	got := string(val.([]byte))
 	want := "M"
+
+	if !g.Valid {
+		t.Error("valid should be true")
+	}
 
 	if got != want {
 		t.Errorf("got %s, want %s", got, want)
