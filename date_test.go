@@ -146,6 +146,24 @@ func TestNullDateScanner(t *testing.T) {
 	}
 }
 
+func TestNullDateScannerFromTime(t *testing.T) {
+	date := NullDate{}
+	err := date.Scan(time.Date(2019, time.August, 17, 0, 0, 0, 0, time.Local))
+	if err != nil {
+		t.Errorf("error on date valuer: %v", err)
+	}
+
+	if !date.Valid {
+		t.Errorf("date valid should be true")
+	}
+
+	got := date.Time.Format("2006-01-02")
+	want := "2019-08-17"
+	if got != want {
+		t.Errorf("got %s want %s", got, want)
+	}
+}
+
 func TestNullDateNilScanner(t *testing.T) {
 	date := NullDate{}
 	err := date.Scan(nil)

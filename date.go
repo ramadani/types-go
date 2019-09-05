@@ -91,13 +91,19 @@ func (d *NullDate) Scan(value interface{}) error {
 		return nil
 	}
 
-	date := value.(string)
-	t, err := time.Parse(dateFormat, date)
-	if err != nil {
-		return err
+	switch value.(type) {
+	case string:
+		date := value.(string)
+		t, err := time.Parse(dateFormat, date)
+		if err != nil {
+			return err
+		}
+
+		d.Time = t
+	case time.Time:
+		d.Time = value.(time.Time)
 	}
 
-	d.Time = t
 	d.Valid = true
 	return nil
 }
