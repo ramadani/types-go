@@ -34,6 +34,20 @@ func TestDateScanner(t *testing.T) {
 	}
 }
 
+func TestDateScannerUsingTime(t *testing.T) {
+	date := Date{}
+	err := date.Scan(time.Date(2019, time.August, 17, 0, 0, 0, 0, time.Local))
+	if err != nil {
+		t.Errorf("error on date valuer: %v", err)
+	}
+
+	got := date.Time.Format("2006-01-02")
+	want := "2019-08-17"
+	if got != want {
+		t.Errorf("got %s want %s", got, want)
+	}
+}
+
 func TestDateScannerWrongFormat(t *testing.T) {
 	date := Date{}
 	err := date.Scan("08-17-2019")

@@ -31,13 +31,19 @@ func (d Date) Value() (driver.Value, error) {
 
 // Scan date scanner
 func (d *Date) Scan(value interface{}) error {
-	date := value.(string)
-	t, err := time.Parse(dateFormat, date)
-	if err != nil {
-		return err
+	switch value.(type) {
+	case string:
+		date := value.(string)
+		t, err := time.Parse(dateFormat, date)
+		if err != nil {
+			return err
+		}
+
+		d.Time = t
+	case time.Time:
+		d.Time = value.(time.Time)
 	}
 
-	d.Time = t
 	return nil
 }
 
